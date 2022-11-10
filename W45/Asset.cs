@@ -43,10 +43,6 @@ namespace W45
 
         // Dictionary of Brand/Model List
         protected Dictionary<string, List<string>> _Assets;
-
-        public Assets()
-        {
-        }
     }
 
     internal class Computers : Assets

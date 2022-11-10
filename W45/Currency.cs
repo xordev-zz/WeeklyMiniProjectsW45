@@ -22,20 +22,27 @@ namespace W45
 
     internal class Currencies
     {
-        private Dictionary<string, Currency> _list;
+        private Dictionary<string, Currency> _Currencies;
 
-        public Currencies(Dictionary<string, Currency> list)
+        public Currencies(Dictionary<string, Currency> currencies)
         {
-            _list = list;
+            _Currencies = currencies;
         }
 
-        public Currency? GetCurrencyInfo(string code)
+        //public bool HasCurrency(string code)
+        //{
+        //    return _list.ContainsKey(code);
+        //}
+
+        public bool GetExcangeRateUSD(string code, out double excangeRateUSD)
         {
-            if (_list.TryGetValue(code, out Currency? currencyInfo))
+            if (_Currencies.TryGetValue(code, out var currency))
             {
-                return currencyInfo;
+                excangeRateUSD = currency.ExcangeRateUSD;
+                return true;
             }
-            return null;
+            excangeRateUSD = 0;
+            return false;
         }
     }
 }

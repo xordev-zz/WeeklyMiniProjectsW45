@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,32 +9,46 @@ namespace W45
 {
     internal class Country
     {
-        public string Name { private set; get; }
-        public Currency? CurrencyInfo { private set; get; }
+        public string CountryName { private set; get; }
+        public string CurrencyCode { private set; get; }
 
-        public Country(string name, Currency? currencyInfo)
+        public Country(string countryName, string currencyCode)
         {
-            CurrencyInfo = currencyInfo;
-            Name = name;
+            CountryName = countryName;
+            CurrencyCode = currencyCode;
         }
+
     }
 
     internal class Countries
     {
-        protected Dictionary<string, Country> _countries;
+        private Dictionary<string, Country> _Countries;
 
         public Countries(Dictionary<string, Country> countries)
         {
-            _countries = countries;
+            _Countries = countries;
         }
 
-        public Country? GetCountry (string name)
+        public bool GetCountryName(string countryCode, out string countryName)
         {
-            if (_countries.TryGetValue(name, out var country))
+            if (_Countries.TryGetValue(countryCode, out var country))
             {
-                return country;
+                countryName = country.CountryName;
+                return true;
             }
-            return null;
+            countryName = "NA";
+            return false;
+        }
+
+        public bool GetCurrencyCode(string countryCode, out string currencyCode)
+        {
+            if (_Countries.TryGetValue(countryCode, out var country))
+            {
+                currencyCode = country.CurrencyCode;
+                return true;
+            }
+            currencyCode = "NA";
+            return false;
         }
     }
 }
