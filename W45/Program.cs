@@ -20,9 +20,9 @@ Countries countries = new Countries
     // Case insensitive keys
     new Dictionary<string, Country>(StringComparer.OrdinalIgnoreCase)
     {
-        {"Spain", new ("Spain", currencies.GetCurrency("EUR"))},
-        {"Sweden", new ("Sweden", currencies.GetCurrency("SEK"))},
-        {"Japan", new ("Japan", currencies.GetCurrency("JPY"))}
+        {"Spain", new ("Spain", currencies.GetCurrencyInfo("EUR"))},
+        {"Sweden", new ("Sweden", currencies.GetCurrencyInfo("SEK"))},
+        {"Japan", new ("Japan", currencies.GetCurrencyInfo("JPY"))}
     }
 );
 
@@ -44,10 +44,10 @@ Console.ReadKey();
 
 internal class Purchase
 {
-    public Asset? Item;
-    public Country? Office;
-    public DateTimeOffset PurchaseDate;
-    public double PurchasePrice;
+    public Asset? Item { private set; get; }
+    public Country? Office { private set; get; }
+    public DateTimeOffset PurchaseDate { private set; get; }
+    public double PurchasePrice { private set; get; }
 
     public Purchase(Asset asset, Country? country, string purchaseDate, double purchasePrice)
     {
@@ -66,7 +66,7 @@ internal class AssetList
     {
         double purchasePrice = purchase.Item != null ? purchase.PurchasePrice : 0;
         double excangeRateUSD = purchase.Office != null ?
-                purchase.Office.Currency != null ? purchase.Office.Currency.ExcangeRateUSD : 0 
+                purchase.Office.CurrencyInfo != null ? purchase.Office.CurrencyInfo.ExcangeRateUSD : 0 
                 : 0;
         return purchasePrice* excangeRateUSD;
     }

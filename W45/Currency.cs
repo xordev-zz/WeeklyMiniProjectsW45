@@ -8,9 +8,9 @@ namespace W45
 {
     internal class Currency
     {
-        public string Code;
-        public string Symbol;
-        public double ExcangeRateUSD;
+        public string Code { private set; get; }
+        public string Symbol { private set; get; }
+        public double ExcangeRateUSD { private set; get; }
 
         public Currency(string code, string symbol, double excangeRateUSD)
         {
@@ -29,11 +29,11 @@ namespace W45
             _list = list;
         }
 
-        public Currency? GetCurrency(string code)
+        public Currency? GetCurrencyInfo(string code)
         {
-            if (_list.TryGetValue(code, out Currency? currency))
+            if (_list.TryGetValue(code, out Currency? currencyInfo))
             {
-                return currency;
+                return currencyInfo;
             }
             return null;
         }

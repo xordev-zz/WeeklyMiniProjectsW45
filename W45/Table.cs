@@ -10,7 +10,7 @@ namespace W45
     {
         const string ESC = "\u001b";
         const string CSI = "\u001b[";
-        AssetList _Data;
+        private AssetList _Data;
 
         public Table(ref AssetList data)
         {
@@ -45,7 +45,7 @@ namespace W45
                 double localPurchasePrice = _Data.GetLocalPurchasePrice(l);
                 // double localPurchasePrice = l.Item.PurchasePrice * l.Office.Currency.ExcangeRateUSD;
                 Console.WriteLine($"{CSI}{color}m{l.Item.Type,-10}{l.Item.Brand,-10}{l.Item.Model,-10}{l.Office.Name,-10}{purchaseDate,-15}" +
-                    $"{l.PurchasePrice,9:N2}  {l.Office.Currency.Code,-10}{localPurchasePrice,17:N2}");
+                    $"{l.PurchasePrice,9:N2}  {l.Office.CurrencyInfo.Code,-10}{localPurchasePrice,17:N2}");
             }
             Console.WriteLine($"{CSI}36m============================================================================================={CSI}0m");
         }

@@ -8,12 +8,12 @@ namespace W45
 {
     internal class Country
     {
-        public string Name;
-        public Currency? Currency;
+        public string Name { private set; get; }
+        public Currency? CurrencyInfo { private set; get; }
 
-        public Country(string name, Currency? currency)
+        public Country(string name, Currency? currencyInfo)
         {
-            Currency = currency;
+            CurrencyInfo = currencyInfo;
             Name = name;
         }
     }
@@ -35,6 +35,5 @@ namespace W45
             }
             return null;
         }
-
     }
 }

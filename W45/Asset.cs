@@ -8,9 +8,9 @@ namespace W45
 {
     internal abstract class Asset
     {
-        public string Type = "";
-        public string Brand = "";
-        public string Model = "";
+        public string Type { private set; get; }
+        public string Brand { private set; get; }
+        public string Model { private set; get; }
 
         public Asset(string type, string brand, string model)
         {
