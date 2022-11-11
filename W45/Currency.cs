@@ -1,48 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace W45
+﻿namespace W45
 {
+    // Generic currency info
     internal class Currency
     {
-        public string Code { private set; get; }
+        public string Name { private set; get; }
         public string Symbol { private set; get; }
-        public double ExcangeRateUSD { private set; get; }
+        public double ExcangeRateUSD { set; get; }
 
-        public Currency(string code, string symbol, double excangeRateUSD)
+        public Currency(string name, string symbol, double excangeRateUSD)
         {
-            Code = code;
+            Name = name;
             Symbol = symbol;
             ExcangeRateUSD = excangeRateUSD;
         }
     }
 
+    // List holding currencies
     internal class Currencies
     {
-        private Dictionary<string, Currency> _Currencies;
+        public Dictionary<string, Currency> CurrencyList { set; get; }
 
         public Currencies(Dictionary<string, Currency> currencies)
         {
-            _Currencies = currencies;
+            CurrencyList = currencies;
         }
 
-        //public bool HasCurrency(string code)
-        //{
-        //    return _list.ContainsKey(code);
-        //}
-
+        // Get exchange rate from currency code
         public bool GetExcangeRateUSD(string code, out double excangeRateUSD)
         {
-            if (_Currencies.TryGetValue(code, out var currency))
+            if (CurrencyList.TryGetValue(code, out var currency))
             {
                 excangeRateUSD = currency.ExcangeRateUSD;
                 return true;
             }
             excangeRateUSD = 0;
             return false;
+        }
+
+        // Set new exchange rate on "currency code"
+        public bool SetExcangeRateUSD(string code, double excahngeRate)
+        {
+            if (CurrencyList.TryGetValue(code, out var currency))
+            {
+                currency.ExcangeRateUSD = excahngeRate;
+                return true;
+            }
+            return false;
+        }
+
+        // Get string of all currency codes
+        public string GetCurrencyCodeString()
+        {
+            return string.Join(", ", CurrencyList.Keys);
+        }
+
+        // Get string[] of all currency codes
+        public string[] GetCurrencyCodeStringArray()
+        {
+            return CurrencyList.Keys.ToArray();
         }
     }
 }

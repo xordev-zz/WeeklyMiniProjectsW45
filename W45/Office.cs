@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace W45
+﻿namespace W45
 {
+    // Generic office info
     internal class Office
     {
         public string OfficeName { private set; get; }
@@ -18,15 +13,17 @@ namespace W45
         }
     }
 
+    // List holding  info of offices
     internal class Offices
     {
-        private Dictionary<string, Office> _Offices;
+        private static Dictionary<string, Office> _Offices;
 
         public Offices(Dictionary<string, Office> offices)
         {
             _Offices = offices;
         }
 
+        // Get office name from office code
         public string GetOfficeName(string officeCode)
         {
             if (_Offices.TryGetValue(officeCode, out var office))
@@ -36,6 +33,7 @@ namespace W45
             return "NA";
         }
 
+        // Get country code from office code
         public bool GetCountryCode(string officeCode, out string countryCode)
         {
             if (_Offices.TryGetValue(officeCode, out var office))
@@ -45,6 +43,18 @@ namespace W45
             }
             countryCode = "NA";
             return false;
+        }
+
+        // Get string of all office codes
+        public static string GetOfficeCodeString()
+        {
+            return string.Join(", ", _Offices.Keys);
+        }
+
+        // Get string[] of all office codes
+        public static string[] GetOfficeCodeStringArray()
+        {
+            return _Offices.Keys.ToArray();
         }
     }
 }

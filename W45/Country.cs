@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace W45
+﻿namespace W45
 {
+    // Generic country info
     internal class Country
     {
         public string CountryName { private set; get; }
@@ -20,6 +14,7 @@ namespace W45
 
     }
 
+    // List holding countries
     internal class Countries
     {
         private Dictionary<string, Country> _Countries;
@@ -29,6 +24,7 @@ namespace W45
             _Countries = countries;
         }
 
+        // Get country name from country code
         public bool GetCountryName(string countryCode, out string countryName)
         {
             if (_Countries.TryGetValue(countryCode, out var country))
@@ -40,6 +36,7 @@ namespace W45
             return false;
         }
 
+        // Get currency code from from country code
         public bool GetCurrencyCode(string countryCode, out string currencyCode)
         {
             if (_Countries.TryGetValue(countryCode, out var country))
